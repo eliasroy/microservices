@@ -1,5 +1,7 @@
 package com.store.orders_microservice.model.dtos;
 
+import com.store.orders_microservice.model.entities.Order;
+import com.store.orders_microservice.model.entities.OrderItems;
 import lombok.*;
 
 @Data
@@ -13,4 +15,15 @@ public class OrderItemRequest {
     private String sku;
     private Double price;
     private Long quantity;
+
+    public OrderItems itemRequestToOrderItem(OrderItemRequest orderItemItems,Order order)
+    {
+        return OrderItems.builder()
+                .id(orderItemItems.getId())
+                .sku(orderItemItems.getSku())
+                .price(orderItemItems.getPrice())
+                .quantity(orderItemItems.getQuantity())
+                .order(order)
+                .build();
+    }
 }

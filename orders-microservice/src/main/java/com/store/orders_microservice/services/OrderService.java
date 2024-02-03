@@ -15,8 +15,14 @@ public class OrderService {
 
     public void placeOrder(OrderRequest orderRequest) {
 
+        //check for inventory
+
         Order order= new Order();
         order.setOrderNumber(UUID.randomUUID().toString());
+        order.setOrderItems(orderRequest.getOrderItemsRequest().stream()
+                .map(orderItem -> orderItem.itemRequestToOrderItem(orderItem,order))
+                .toList());
+        this.orderRepository.save(order);
 
     }
 }
