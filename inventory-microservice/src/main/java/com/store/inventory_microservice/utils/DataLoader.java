@@ -28,6 +28,7 @@ public class DataLoader implements CommandLineRunner {
                     )
             );
         }
+
         log.info("data loaded ...");
     }
 }
