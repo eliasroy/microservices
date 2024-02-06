@@ -1,13 +1,14 @@
 package com.store.orders_microservice.services;
 
-import com.store.orders_microservice.model.dtos.BaseResponse;
-import com.store.orders_microservice.model.dtos.OrderRequest;
+import com.store.orders_microservice.model.dtos.*;
 import com.store.orders_microservice.model.entities.Order;
+import com.store.orders_microservice.model.entities.OrderItems;
 import com.store.orders_microservice.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -40,5 +41,20 @@ public class OrderService {
 
 
 
+    }
+
+    public List<OrderResponse> getAllOrders() {
+        List<Order> orders= this.orderRepository.findAll();
+
+        return orders.stream().map(this::mapToOrderResponse).toList();
+    }
+
+    private OrderResponse mapToOrderResponse(Order order) {
+    return new OrderResponse(order.getId(),order.getOrderNumber(),
+            order.getOrderItems().stream().map(this::mapToOrderItemResquest).toList();
+    }
+
+    private OrderItemResponse mapToOrderItemResquest(OrderItems orderItems) {
+    return new OrderItemResponse(orderItems.getId(),orderItems.getSku(),orderItems.getPrice(),orderItems.getQuantity());
     }
 }

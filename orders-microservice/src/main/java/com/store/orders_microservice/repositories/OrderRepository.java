@@ -1,4 +1,4 @@
-kage com.store.orders_microservice.repositories;
+ackage com.store.orders_microservice.repositories;
 
 import com.store.orders_microservice.model.entities.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
