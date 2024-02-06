@@ -51,7 +51,7 @@ public class OrderService {
 
     private OrderResponse mapToOrderResponse(Order order) {
     return new OrderResponse(order.getId(),order.getOrderNumber(),
-            order.getOrderItems().stream().map(this::mapToOrderItemResquest).toList();
+            order.getOrderItems().stream().map(this::mapToOrderItemResquest).toList());
     }
 
     private OrderItemResponse mapToOrderItemResquest(OrderItems orderItems) {

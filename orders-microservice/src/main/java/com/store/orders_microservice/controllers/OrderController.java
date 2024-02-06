@@ -1,13 +1,13 @@
 package com.store.orders_microservice.controllers;
 
 import com.store.orders_microservice.model.dtos.OrderRequest;
+import com.store.orders_microservice.model.dtos.OrderResponse;
 import com.store.orders_microservice.services.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -21,5 +21,12 @@ public class OrderController {
     {
         this.orderService.placeOrder(orderRequest);
         return "Order placed successfully";
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<OrderResponse> getAllOrders()
+    {
+        return this.orderService.getAllOrders();
     }
 }
